@@ -154,8 +154,6 @@ def getSource(uid,pwd):
             # print tmp
             ll.append(tmp)
         lists.append(ll)
-    fw = open('/home/innerac/dev/info','a')
-    fw.write('{} {}\n'.format(uid,pwd))
     
     subjects = []    
     for list in lists:
@@ -166,9 +164,6 @@ def getSource(uid,pwd):
 			subject.append(list[6])
 			subjects.append(subject)
     credit = caluGrade.get_credit(subjects) 
-    fw.write('{}\n'.format(credit))  
-    fw.write('##'*10+'\n')
-    fw.close()
     return credit
 
 if __name__ == '__main__':
