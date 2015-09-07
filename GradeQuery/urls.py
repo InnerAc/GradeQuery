@@ -19,8 +19,6 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     # only test
-    # url(r'^add1/(\d+)/(\d+)/$','showTest.views.add1',name='add1'),
-   	url(r'^result$','showTest.views.result',name='result'),
     url(r'^query$','showTest.views.query',name='query'),
     url(r'^$', 'showTest.views.home', name='home'),
 ]

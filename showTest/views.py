@@ -9,19 +9,7 @@ def index(request):
 def add1(request,a,b):
 	c = int(a) + int(b)
 	return HttpResponse(str(c))
-# def result(request):
-#     return render(request, 'home.html')
-# 	if request.method == 'POST':
-# 		form = AddForm(request.POST)
-		
-# 		if form.is_valid():
-# 			uid = request.GET['uid']
-# 			pwd = request.GET['pwd'] 
-# 			c = int(uid) + int(pwd)
-# 			return HttpResponse(str(c))
-# 	else:
-# 		form = AddForm()
-# 	return render(request,'query.html',{'form': form})
+	
 def query(request):
 	if request.method == 'POST':
 		form = AddForm(request.POST)
