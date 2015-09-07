@@ -19,7 +19,7 @@ def query(request):
 			uid = request.POST['uid']
 			pwd = request.POST['pwd'] 
 			credit = get_crawler.getSource(uid,pwd)
-			return HttpResponse(credit)
+			return render(request,'show.html',{'string': credit})
 	else:
 		form = AddForm()
 	return render(request,'query.html',{'form': form})
