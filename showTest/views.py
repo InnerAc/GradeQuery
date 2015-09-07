@@ -2,6 +2,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from .forms import AddForm
+from grade_crawle.src import get_crawler
 # Create your views here.
 
 def index(request):
@@ -17,8 +18,8 @@ def query(request):
 		if form.is_valid():
 			uid = request.POST['uid']
 			pwd = request.POST['pwd'] 
-			c = uid + pwd
-			return HttpResponse(c)
+			credit = get_crawler.getSource(uid,pwd)
+			return HttpResponse(credit)
 	else:
 		form = AddForm()
 	return render(request,'query.html',{'form': form})

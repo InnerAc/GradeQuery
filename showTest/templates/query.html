@@ -3,11 +3,11 @@
 <body>
 <p>请输入学号和密码</p>
 <form action="query" method="POST">
-    <!--学号: <input type="text" name="uid"> <br>
-    密码: <input type="password" name="pwd"> <br>-->
    {% csrf_token %} 
    {{ form }}
     <input type="submit" value="提交">
 </form>
+{% load staticfiles %}
+<img src="{% static "bg.png" %}" alt="My image"/>
 </body>
 </html>
