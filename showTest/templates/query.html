@@ -1,13 +1,30 @@
 <!DOCTYPE html>
 <html>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="format-detection" content="email=no"/>
+ <style type="text/css">
+        *, *:before, *:after {
+            -webkit-tap-highlight-color:rgba(0, 0, 0, 0);
+        }
+</style>
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1256285403'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1256285403%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
 <body>
-<p>请输入学号和密码</p>
-<form action="query" method="POST">
-   {% csrf_token %} 
-   {{ form }}
-    <input type="submit" value="提交">
-</form>
-{% load staticfiles %}
-<img src="{% static "bg.png" %}" alt="My image"/>
+<div style="width:100%;background:#e43a3ed;height:10px;line-height:10px;display:block;">
+    <center><h3>绩点查询不像系统的系统 alpha0.9</h3></center>
+有人担心信息泄露，不要担心这种问题，Django自带的是sqlite而且我根本没配置，所以我根本没用数据库。请大家放心食用。<br>
+Some people worry about information leakage, do not worry about this problem, Django comes with SQLite and I am not configured, so I do not use the database. Please rest assured that consumption.<br>
+    <p>请输入学号和密码</p>
+    {{ errors }}
+    <form action="query" method="POST">
+        {% csrf_token %} 
+        {{ form }}
+        <input type="submit" value="提交">
+    </form>
+    {% load staticfiles %}
+    <img src="{% static "bg.png" %}" alt="My image"/>   
+</div>
+
 </body>
 </html>

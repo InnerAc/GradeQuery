@@ -41,7 +41,7 @@ def getCheckCode(url,analyzer):
         localPic.close() 
         result = analyzer.analyze(path)
         if result == None:
-            print "解析失败..."
+            # print "解析失败..."
             postData["v_yzm"] = 'Error'
         else:
             print "解析成功，解析结果：%s"%result
@@ -126,7 +126,7 @@ def getSource(uid,pwd):
         'mm':password,             
     }
 
-    test_number = 10
+    test_number = 5
 
     while login(login_url,vcode_url,postData,headers,analyzer) == False:
         test_number -= 1
@@ -134,7 +134,7 @@ def getSource(uid,pwd):
             print "please check out your uid and password!!"
             break;
     if test_number <= 0:
-        return '请输入正确的用户名密码'
+        return []
     if test_number > 0:
         page = getHtml(all_url)
     print test_number
@@ -155,16 +155,19 @@ def getSource(uid,pwd):
             ll.append(tmp)
         lists.append(ll)
     
-    subjects = []    
+    subjects = [] 
+    rsubjects = []   
     for list in lists:
 		subject = []
 		if(list[5] == '\xe5\xbf\x85\xe4\xbf\xae'):
-			# fw.write('{} {:>3} {:<4} {:<5}\n'.format(list[2],list[4],list[5],list[6])) 
+			rsubjects.append([list[2],list[4],list[6]]) 
 			subject.append(list[4])
 			subject.append(list[6])
 			subjects.append(subject)
-    credit = caluGrade.get_credit(subjects) 
-    return credit
+    credit = caluGrade.get_credit(subjects)
+    subject = ['平均绩点',credit,' '] 
+    rsubjects.insert(0,subject)
+    return rsubjects
 
 if __name__ == '__main__':
     uid = '1206010416'
