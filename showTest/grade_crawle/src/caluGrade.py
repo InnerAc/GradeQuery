@@ -9,6 +9,10 @@ def get_grade(gra):
 		return 3.5
 	if(gra == '\xe5\x8f\x8a\xe6\xa0\xbc'):
 		return 2.5
+	if(gra == '\xe4\xb8\x8d\xe5\x8f\x8a\xe6\xa0\xbc'):
+		return 0
+	if(int(string.atof(gra)) < 60):
+		return 0
 	return min(5,((int(string.atof(gra))-60)//5)*5/10.0 + 2)
 
 def get_credit(lines):
