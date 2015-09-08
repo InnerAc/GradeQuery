@@ -16,7 +16,8 @@ def query(request):
 		if form.is_valid():
 			uid = request.POST['uid']
 			pwd = request.POST['pwd'] 
-			subjects = get_crawler.getSource(uid,pwd)
+			check = request.POST['check']
+			subjects = get_crawler.getSource(uid,pwd,check)
 			if subjects:
 				return render(request,'show.html',{'subjects': subjects})
 			else:

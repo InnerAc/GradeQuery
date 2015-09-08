@@ -88,7 +88,7 @@ def getHtml(url):
     html = page.read().decode("gbk")
     return html
 
-def getSource(uid,pwd):
+def getSource(uid,pwd,check):
     # print "初始化分类器..."
     segmenter = NormalSegmenter()
     extractor = SimpleFeatureExtractor( feature_size=20, stretch=False )
@@ -126,6 +126,13 @@ def getSource(uid,pwd):
         'mm':password,             
     }
 
+    # select
+    if check == 'all':
+        url = all_url
+    else:
+        url = now_url
+
+
     test_number = 5
 
     while login(login_url,vcode_url,postData,headers,analyzer) == False:
@@ -136,7 +143,7 @@ def getSource(uid,pwd):
     if test_number <= 0:
         return []
     if test_number > 0:
-        page = getHtml(all_url)
+        page = getHtml(url)
     print test_number
     page = page.encode('utf-8')
     soup = BeautifulSoup(page)
@@ -157,13 +164,27 @@ def getSource(uid,pwd):
     
     subjects = [] 
     rsubjects = []   
-    for list in lists:
+
+        # select
+    if check == 'all':
+        for list in lists:
 		subject = []
 		if(list[5] == '\xe5\xbf\x85\xe4\xbf\xae'):
 			rsubjects.append([list[2],list[4],list[6]]) 
 			subject.append(list[4])
 			subject.append(list[6])
 			subjects.append(subject)
+    else:
+        for list in lists:
+		subject = []
+		if(list[5] == '\xe5\xbf\x85\xe4\xbf\xae'):
+			rsubjects.append([list[2],list[4],list[9]]) 
+			subject.append(list[4])
+			subject.append(list[9])
+			subjects.append(subject)
+
+
+    
     credit = caluGrade.get_credit(subjects)
     subject = ['平均绩点',credit,' '] 
     rsubjects.insert(0,subject)

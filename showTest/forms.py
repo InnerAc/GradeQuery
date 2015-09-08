@@ -2,5 +2,10 @@
 from django import forms
 
 class AddForm(forms.Form):
-	uid = forms.CharField(label='学号',required=False)
-	pwd = forms.CharField(label='密码',widget=forms.PasswordInput)
+	RADIO_CHOICES = (
+            ('one', "本学期"),         
+            ('all', "全部绩点"),       
+    )
+	uid = forms.CharField(label='学号',required=False,widget=forms.TextInput(attrs={'placeholder': '学号'}))
+	pwd = forms.CharField(label='密码',widget=forms.PasswordInput(attrs={'placeholder': '密码'}))
+	check = forms.ChoiceField(widget=forms.RadioSelect, choices=RADIO_CHOICES)
