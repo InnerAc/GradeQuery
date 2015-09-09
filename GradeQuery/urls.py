@@ -25,4 +25,8 @@ urlpatterns = [
     # only test
     url(r'^query$','showTest.views.query',name='query'),
     url(r'^$', 'showTest.views.home', name='home'),
+    
+    # for android
+    url(r'^qilin/getkey/([a-z A-Z \d]+)$','showTest.views.getKey', name='getkey'),
+    url(r'^qilin/getgrade/([a-z A-Z \d]+)/([a-z A-Z \d]+)/([a-z A-Z \d]+)/([a-z A-Z \d]+)$','showTest.views.getGrade', name='getgrade'),
 ]
