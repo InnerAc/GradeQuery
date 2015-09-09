@@ -1,24 +1,107 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="utf-8">
     <title>Thanks</title>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <style type="text/css">
+        body {
+            line-height: 1;
+            background: #FFF;
+            font-family: 'PT Sans', Helvetica, Arial, sans-serif;
+            text-align: center;
+            color: #000;
+            font-size:18px;
+        }
+        table {
+            margin:10px auto;
+            width:90%;
+            max-width:600px;
+        }
+        tr {
+            padding:10px 0 0 0 ;
+        }
+        .td1 {
+            width:60%;
+        }
+        .td2 {
+            width:20%;
+        }
+        .td3 {
+            width:20%;
+        }
+        .resulttext {
+            color:red;
+            font:bold 24px "微软雅黑",Arial;
+            text-indent:1em;
+            text-shadow:#bbb 2px 2px 2px; 
+            font-size:24px;
+            font-weight:bold;
+            margin-top:40px;
+            margin-bottom:20px;
+            margin-left: auto;
+            margin-right: auto;
+            width:80%;
+            max-width:600px;
+        }
+        .intro {
+            font-size:16px;
+            padding: 10px 20px ;
+            line-height: 2;
+            text-align: center;
+        }
+        img {
+            width:30%;
+            max-width:250px;
+        }
+     </style>
 </head>
 <body>
-	<table>
-	{% for subject in subjects %}
-		<tr>
-		<td> {{ subject.0 }} </td>
-		<td> {{ subject.1 }} </td>
-		<td> {{ subject.2 }} </td>
-		</tr>
-	{% endfor %}
-	</table>
-	<br>绩点查出来了吧，写个程序不容易，美工还带着前端跑了。求加好友，求资助。
-	<br>纪存：后台好乱，需要清理，更多功能，敬请打赏
-	<br>亓炜：前端不易，求点电费
-	<br>
+    <div class="resulttext">
+        你的绩点为 {{ subjects.0 }}
+    </div>
+    <table align="center">
+        <tr>
+        <td class="td1">科目</td>
+        <td class="td2">学分</td>
+        <td class="td3">成绩</td>
+        </tr>
+        {% for subject in subjects %}
+			{% if subject != subjects.0 %}
+                <tr>
+		          <td class="td1"> {{ subject.0 }} </td>
+		          <td class="td2"> {{ subject.1 }} </td>
+		          <td class="td3"> {{ subject.2 }} </td>
+		         </tr>
+            {% endif %}
+		{% endfor %}
+    </table>
+    <div class="intro">
+        <br>绩点查出来了吧，写个程序不容易，还要交电费。求打赏啊。
+		<br>纪存：后台好乱，求点网费
+		<br>亓炜：前端不易，求点电费
+		<br>
+	</div>
 	{% load staticfiles %}
-	<img width="300" src="{% static "zfb.jpg" %}" alt="My image"/>
-	<img width="300" src="{% static "zfbq.jpg" %}" alt="My image"/>
+	<img src="{% static "img/zfb.jpg" %}" alt="My image"/>
+	<img src="{% static "img/zfbq.jpg" %}" alt="My image"/>
+    <script src="{% static "js/jquery-1.8.2.min.js" %}" ></script>
+    <script>
+        $(document).ready(function() {
+            var n=0;
+            $('tr').each(function(){
+                if (n%2===1 && n>0){
+                    $(this).css('background-color','#eee');
+                }
+                else if (n%2===0 && n>0){
+                    $(this).css('background-color','#ddd');
+                }
+                else{
+                    $(this).css('background-color','#bbb');
+                }
+                n+=1;
+            });
+        });
+    </script>
 </body>
 </html>

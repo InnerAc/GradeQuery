@@ -186,8 +186,7 @@ def getSource(uid,pwd,check):
 
     
     credit = caluGrade.get_credit(subjects)
-    subject = ['平均绩点',credit,' '] 
-    rsubjects.insert(0,subject)
+    rsubjects.insert(0,credit)
     return rsubjects
 
 if __name__ == '__main__':

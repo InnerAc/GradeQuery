@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>绩点查询alpha1.0</title>
+    <title>绩点查询alpha1.1</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1256285403'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1256285403%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
     <style type="text/css">
@@ -199,22 +199,25 @@
 <body>
 
     <div class="page-container">
-        <h1>绩点查询终于像点系统的系统<br> alpha1.0</h1>
+        <h1>绩点查询终于像点系统的系统<br> alpha1.1</h1>
         <form action="query" method="post">
             {% csrf_token %} 
             {{ form.uid }}
             {{ form.pwd }}
-            请选择查询方式
+           <font color="red">请选择查询方式 !!!(默认本学期)</font>
            <center> {{ form.check }} </center>
-            <button type="submit">查询</button>
+            <button type="submit" onclick="SubmitForm();" >查询</button>
         </form>
         <div class="intro">
-            有人担心信息泄露，不要担心这种问题，Django自带的是sqlite而且我根本没配置，所以我根本没用数据库。请大家放心食用。
+            感谢陈洁（阿洁哥）的验证码识别，和亓炜的一半的前端。那个，说明一下，我们无法做排名，因为我们没有保存大家的数据也不会去保存，我们只是数据的搬运工和计算器。
         </div>
         <div class="intro">
-            It was fear of information leaks, do not worry about this problem, Django comes with SQLite and I never configured, so I use the database. Please rest assured that everyone eat.
+            Thanks for the front half of the Chen Jie (Ajie brother) verification code identification, and Qi Wei. That, to explain that we can not do the ranking, because we did not save everyone's data is not going to save, we just data movers and calculator.
         </div>
     </div>
+<script>
+    document.getElementById("id_check_0").setAttribute("checked","checked");
+</script>
 
 </body>
 
