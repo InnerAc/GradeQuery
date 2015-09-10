@@ -66,11 +66,15 @@ def getKey(request,key):
 		return HttpResponse(json.dumps(response_data), content_type="application/json")
 def getGrade(request,key,uid,pwd,check):
 	if(key == 'qilin'):
-		subjects = get_crawler.getSource(uid,pwd,check)
-		lists = []
-		for subject in subjects:
-			if subject != subjects[0]:
-				dict = {'subject':subject[0],'grade':subject[1],'score':subject[2]}
-				lists.append(dict)
-		dicts = {'credit':subjects[0],'subjects':lists}
+		is_login = get_crawler.is_login(uid,pwd)
+		if is_login:
+			subjects = get_crawler.getSource(check)
+			lists = []
+			for subject in subjects:
+				if subject != subjects[0]:
+					dict = {'subject':subject[0],'grade':subject[1],'score':subject[2]}
+					lists.append(dict)
+			dicts = {'credit':subjects[0],'subjects':lists}
+		else:
+			dicts = {}
 		return HttpResponse(json.dumps(dicts), content_type="application/json")
