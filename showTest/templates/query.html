@@ -200,7 +200,7 @@
 
     <div class="page-container">
         <h1>绩点查询终于像点系统的系统<br> alpha1.1</h1>
-        <form action="query" method="post">
+        <form action="/query" method="post">
             {% csrf_token %} 
             {{ form.uid }}
             {{ form.pwd }}
@@ -209,10 +209,10 @@
             <button type="submit" onclick="SubmitForm();" >查询</button>
         </form>
         <div class="intro">
-            感谢陈洁（阿洁哥）的验证码识别，和亓炜的一半的前端。那个，说明一下，我们无法做排名，因为我们没有保存大家的数据也不会去保存，我们只是数据的搬运工和计算器。
+            感谢陈洁（阿洁哥）的验证码识别，和亓炜的的前端。那个，说明一下，我们无法做排名，因为我们没有保存大家的数据也不会去保存，我们只是数据的搬运工和计算器。
         </div>
         <div class="intro">
-            Thanks for the front half of the Chen Jie (Ajie brother) verification code identification, and Qi Wei. That, to explain that we can not do the ranking, because we did not save everyone's data is not going to save, we just data movers and calculator.
+            Thanks Chen Jie (Ajie) CAPTCHA recognition, and qiwei's front end. One note, we are unable to do rankings, because we did not save the data will not be saved, we are just data movers and calculator.
         </div>
     </div>
 <script>

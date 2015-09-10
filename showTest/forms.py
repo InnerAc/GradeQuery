@@ -3,7 +3,7 @@ from django import forms
 
 class AddForm(forms.Form):
 	RADIO_CHOICES = (
-            ('one', "本学期"),         
+            ('one', "本学期的"),         
             ('all', "全部绩点"),       
     )
 	uid = forms.CharField(label='学号',required=False,widget=forms.TextInput(attrs={'placeholder': '学号'}))

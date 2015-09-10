@@ -88,7 +88,7 @@ def getHtml(url):
     html = page.read().decode("gbk")
     return html
 
-def getSource(uid,pwd,check):
+def is_login(uid,pwd):
     # print "初始化分类器..."
     segmenter = NormalSegmenter()
     extractor = SimpleFeatureExtractor( feature_size=20, stretch=False )
@@ -100,8 +100,7 @@ def getSource(uid,pwd,check):
     # print "开始模拟登录..."
     login_url = "http://202.119.113.135/loginAction.do"
     vcode_url = 'http://202.119.113.135/validateCodeAction.do?random=0.2583906068466604'
-    all_url = "http://202.119.113.135/gradeLnAllAction.do?type=ln&oper=sxinfo&lnsxdm=001"
-    now_url = "http://202.119.113.135/bxqcjcxAction.do"
+
     #post请求头部
     global headers
     global postData
@@ -126,13 +125,6 @@ def getSource(uid,pwd,check):
         'mm':password,             
     }
 
-    # select
-    if check == 'all':
-        url = all_url
-    else:
-        url = now_url
-
-
     test_number = 5
 
     while login(login_url,vcode_url,postData,headers,analyzer) == False:
@@ -141,10 +133,22 @@ def getSource(uid,pwd,check):
             print "please check out your uid and password!!"
             break;
     if test_number <= 0:
-        return []
-    if test_number > 0:
-        page = getHtml(url)
-    print test_number
+        return False
+    return True
+    
+    
+def getSource(check):
+
+    all_url = "http://202.119.113.135/gradeLnAllAction.do?type=ln&oper=sxinfo&lnsxdm=001"
+    now_url = "http://202.119.113.135/bxqcjcxAction.do"
+    
+    # select
+    if check == 'all':
+        url = all_url
+    else:
+        url = now_url
+
+    page = getHtml(url)
     page = page.encode('utf-8')
     soup = BeautifulSoup(page)
     trs = soup.findAll('tr',{'class':'odd'})
@@ -188,12 +192,3 @@ def getSource(uid,pwd,check):
     credit = caluGrade.get_credit(subjects)
     rsubjects.insert(0,credit)
     return rsubjects
-
-if __name__ == '__main__':
-    uid = '1206010416'
-    pwd = '941024'
-    lists = getSource(uid,pwd)
-    for list in lists:
-        for ll in list:
-            print ll,
-        print
