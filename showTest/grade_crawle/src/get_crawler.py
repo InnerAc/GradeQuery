@@ -25,7 +25,8 @@ headers = {}
 global postData
 postData = {}
 
-
+global root_dir 
+root_dir = '/home/innerac/dev/GradeQuery/'
 
 
 def getCheckCode(url,analyzer):
@@ -33,7 +34,7 @@ def getCheckCode(url,analyzer):
     response = urllib2.urlopen(url)
     status = response.getcode()
     picData = response.read()
-    path = "/home/innerac/dev/GradeQuery/showTest/grade_crawle/tmp/vcode.jpg"
+    path = root_dir+"showTest/grade_crawle/tmp/vcode.jpg"
     # path = "../tmp/vcode.jpg"
     if status == 200:
         localPic = open(path, "wb")
@@ -94,7 +95,7 @@ def is_login(uid,pwd):
     extractor = SimpleFeatureExtractor( feature_size=20, stretch=False )
 
     analyzer = KNNAnalyzer( segmenter, extractor)
-    analyzer.train('/home/innerac/dev/GradeQuery/showTest/grade_crawle/data/features.jpg')
+    analyzer.train(root_dir+'showTest/grade_crawle/data/features.jpg')
     # analyzer.train('../data/features.jpg')
 
     # print "开始模拟登录..."
