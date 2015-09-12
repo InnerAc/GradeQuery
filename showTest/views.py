@@ -27,7 +27,6 @@ def query(request):
 			check = request.POST['check']
 			is_login = get_crawler.is_login(uid,pwd)
 			if is_login:
-				request.session['is_login'] = is_login
 				subjects = get_crawler.getSource(check)
 				return render(request,'show.html',{'subjects': subjects})
 			else:
@@ -36,17 +35,20 @@ def query(request):
 		form = AddForm()
 		return render(request,'query.html',{'form': form})
 def show(request,check):
+	is_login = True
 	if check == 'logout':
-		request.session['is_login'] = False
-	print request.session.get('is_login')
-	if request.session.get('is_login') == True:
-		try:
-			subjects = get_crawler.getSource(check)
-			return render(request,'show.html',{'subjects': subjects})
-		except:
-			return HttpResponseRedirect('/query')
-	else:
-		return HttpResponseRedirect('/query')
+		is_login = False
+		del request.session['uid']
+		del request.session['pwd']
+	if is_login:
+		is_login = get_crawler.is_login(request.session['uid'],request.session['pwd'])
+		if is_login:
+			try:
+				subjects = get_crawler.getSource(check)
+				return render(request,'show.html',{'subjects': subjects})
+			except:
+				return HttpResponseRedirect('/query')
+	return HttpResponseRedirect('/query')
 def home(request):
     return render(request, 'home.html')
 
