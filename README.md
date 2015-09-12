@@ -23,5 +23,8 @@ or
 - set root_dir = YourDir + '/GradeQuery/'(in showTest/grade_crawle/src/get_crawler.py)
 - set DEBUG = False(in GradeQuery/settings.py)
 
+- remove db.sqlite3
+
 ### Start
+- python manage.py migrate
 - python manage.py runserver 0.0.0.0:port(at the root_dir) --insecure
