@@ -35,7 +35,10 @@ def query(request):
 		form = AddForm()
 		return render(request,'query.html',{'form': form})
 def show(request,check):
-	is_login = True
+	if request.session.get('uid'):
+		is_login = True
+	else:
+		is_login = False
 	if check == 'logout':
 		is_login = False
 		del request.session['uid']
