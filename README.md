@@ -7,6 +7,9 @@ This is a django project for grade point query
 - sudo apt-get install python-numpy
 - sudo apt-get install Python-bs4
 - sudo apt-get install libopencv-dev
+- sudo apt-get install build-essential python
+- sudo apt-get install python-dev
+- sudo apt-get install nginx
 #### How to install django
 you can install by apt-get  (sudo apt-get install python-django) but the version is old.
 so you can install by follow:
@@ -29,3 +32,6 @@ or
 - python manage.py makemigrations
 - python manage.py migrate
 - python manage.py runserver 0.0.0.0:port(at the root_dir) --insecure
+
+### Deploy
+- uwsgi --http :port --chdir YourDir+'/GradeQuery'  --module GradeQuery.wsgi
