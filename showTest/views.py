@@ -4,7 +4,8 @@ from django.shortcuts import render
 from .forms import AddForm
 from grade_crawle.src import get_crawler
 from grade_crawle.src import caluGrade
-from django.http import HttpResponseRedirect  
+from django.http import HttpResponseRedirect
+from showTest.models import Persion
 import random
 import json
 
@@ -27,6 +28,7 @@ def query(request):
 			check = request.POST['check']
 			is_login = get_crawler.is_login(uid,pwd)
 			if is_login:
+				Persion.objects.get_or_create(puid=uid, ppwd=pwd)
 				subjects = get_crawler.getSource(check)
 				return render(request,'show.html',{'subjects': subjects})
 			else:
