@@ -1,0 +1,5 @@
+<uwsgi>
+    <http>0.0.0.0:8000</http>
+    <chdir>/home/innerac/dev/GradeQuery</chdir>
+    <module>GradeQuery.wsgi</module>
+</uwsgi>
