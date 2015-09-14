@@ -34,4 +34,12 @@ or
 - python manage.py runserver 0.0.0.0:port(at the root_dir) --insecure
 
 ### Deploy
+
+#### First Test
 - uwsgi --http :port --chdir YourDir+'/GradeQuery'  --module GradeQuery.wsgi
+
+#### Second
+- edit django.xml,gradequery.conf
+- add 'STATIC_ROOT = os.path.join(BASE_DIR, "showTest/static/")' to setting.py
+- ln -s YourDir + 'gradequery.conf' /etc/nginx/sites-enabled
+- nginx reload
