@@ -1,5 +1,5 @@
 <uwsgi>
-    <http>0.0.0.0:8000</http>
+    <socket>/home/innerac/dev/GradeQuery/showTest.sock</socket>
     <chdir>/home/innerac/dev/GradeQuery</chdir>
     <module>GradeQuery.wsgi</module>
 </uwsgi>
