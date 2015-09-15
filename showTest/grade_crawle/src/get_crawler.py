@@ -147,7 +147,7 @@ def getSource(check):
     # select
     if check == 'all' or check == 'inter':
         url = all_url
-    elif check == 'year':
+    elif check == 'year' or check == 'oldyear':
         url = year_2015
     elif check == 'one':
         url = now_url
@@ -155,9 +155,12 @@ def getSource(check):
     page = getHtml(url)
     page = page.encode('utf-8')
     if check == 'year':
-        page = page.encode('utf-8')
         tmp_x = page.find("<a name=\"2014-2015")
         page = page[tmp_x:]
+    if check == 'oldyear':
+        tmp_x = page.find("<a name=\"2013-2014")
+        tmp_y = page.find("<a name=\"2014-2015")
+        page = page[tmp_x:tmp_y]
     soup = BeautifulSoup(page)
     trs = soup.findAll('tr',{'class':'odd'})
     lists = []
@@ -178,7 +181,7 @@ def getSource(check):
     rsubjects = []   
 
         # select
-    if (check == 'all' or check == 'year' or check == 'inter'):
+    if (check == 'all' or check == 'year' or check == 'oldyear' or check == 'inter'):
         if check == 'inter':
             tmp_bool = True
         else:
