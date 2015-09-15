@@ -142,15 +142,22 @@ def getSource(check):
 
     all_url = "http://202.119.113.135/gradeLnAllAction.do?type=ln&oper=sxinfo&lnsxdm=001"
     now_url = "http://202.119.113.135/bxqcjcxAction.do"
+    year_2015 = "http://202.119.113.135/gradeLnAllAction.do?type=ln&oper=qbinfo&lnxndm=2012-2013%D1%A7%C4%EA1(%C1%BD%D1%A7%C6%DA)"
     
     # select
-    if check == 'all':
+    if check == 'all' or check == 'inter':
         url = all_url
-    else:
+    elif check == 'year':
+        url = year_2015
+    elif check == 'one':
         url = now_url
 
     page = getHtml(url)
     page = page.encode('utf-8')
+    if check == 'year':
+        page = page.encode('utf-8')
+        tmp_x = page.find("<a name=\"2014-2015")
+        page = page[tmp_x:]
     soup = BeautifulSoup(page)
     trs = soup.findAll('tr',{'class':'odd'})
     lists = []
@@ -171,15 +178,19 @@ def getSource(check):
     rsubjects = []   
 
         # select
-    if check == 'all':
+    if (check == 'all' or check == 'year' or check == 'inter'):
+        if check == 'inter':
+            tmp_bool = True
+        else:
+            tmp_bool = False
         for list in lists:
 		subject = []
-		if(list[5] == '\xe5\xbf\x85\xe4\xbf\xae'):
+		if(list[5] == '\xe5\xbf\x85\xe4\xbf\xae' or tmp_bool):
 			rsubjects.append([list[2],list[4],list[6]]) 
 			subject.append(list[4])
 			subject.append(list[6])
 			subjects.append(subject)
-    else:
+    elif check == 'one':
         for list in lists:
 		subject = []
 		if(list[5] == '\xe5\xbf\x85\xe4\xbf\xae'):
