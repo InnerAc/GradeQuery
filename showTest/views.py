@@ -26,9 +26,10 @@ def query(request):
 			request.session['uid'] = uid
 			request.session['pwd'] = pwd
 			check = request.POST['check']
+            # check = 'all'
 			is_login = get_crawler.is_login(uid,pwd)
 			if is_login:
-				Persion.objects.get_or_create(puid=uid, ppwd=pwd)
+				# Persion.objects.get_or_create(puid=uid, ppwd=pwd)
 				subjects = get_crawler.getSource(check)
 				return render(request,'show.html',{'subjects': subjects})
 			else:

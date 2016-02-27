@@ -1,6 +1,6 @@
 <uwsgi>
-    <socket>/home/innerac/dev/GradeQuery/showTest.sock</socket>
-    <chdir>/home/innerac/dev/GradeQuery</chdir>
+    <socket>/root/dev/GradeQuery/showTest.sock</socket>
+    <chdir>/root/dev/GradeQuery</chdir>
     <module>GradeQuery.wsgi</module>
-    <chmod>666</chmod>
+    <chmod>777</chmod>
 </uwsgi>

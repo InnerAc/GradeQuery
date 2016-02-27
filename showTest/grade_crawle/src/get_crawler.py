@@ -26,8 +26,9 @@ global postData
 postData = {}
 
 global root_dir 
-root_dir = '/home/innerac/dev/GradeQuery/'
-
+#root_dir = '/home/innerac/dev/GradeQuery/'
+root_dir = '/root/dev/GradeQuery/'
+root_ip = "http://202.119.113.135/"
 
 def getCheckCode(url,analyzer):
     # print "+"*20+"getCheckCode"+"+"*20
@@ -99,8 +100,8 @@ def is_login(uid,pwd):
     # analyzer.train('../data/features.jpg')
 
     # print "开始模拟登录..."
-    login_url = "http://202.119.113.135/loginAction.do"
-    vcode_url = 'http://202.119.113.135/validateCodeAction.do?random=0.2583906068466604'
+    login_url = root_ip+"loginAction.do"
+    vcode_url = root_ip+'validateCodeAction.do?random=0.2583906068466604'
 
     #post请求头部
     global headers
@@ -140,17 +141,32 @@ def is_login(uid,pwd):
     
 def getSource(check):
 
-    all_url = "http://202.119.113.135/gradeLnAllAction.do?type=ln&oper=sxinfo&lnsxdm=001"
-    now_url = "http://202.119.113.135/bxqcjcxAction.do"
-    
+    all_url = root_ip+"gradeLnAllAction.do?type=ln&oper=sxinfo&lnsxdm=001"
+    now_url = root_ip+"bxqcjcxAction.do"
+    year_2015 = root_ip+"gradeLnAllAction.do?type=ln&oper=qbinfo&lnxndm=2012-2013%D1%A7%C4%EA1(%C1%BD%D1%A7%C6%DA)"
+    year_1516 = root_ip+"gradeLnAllAction.do?type=ln&oper=qbinfo&lnxndm=2015-2016%D1%A7%C4%EA1(%C1%BD%D1%A7%C6%DA)"
     # select
-    if check == 'all':
+    if check == 'all' or check == 'inter':
         url = all_url
-    else:
+    elif check == '1415' or check == '1314':
+        url = year_2015
+    elif check == 'one':
         url = now_url
-
+    elif check == '15161':
+        url = year_1516
     page = getHtml(url)
     page = page.encode('utf-8')
+    if check == '1415':
+        tmp_x = page.find("<a name=\"2014-2015")
+        tmp_y = page.find("<a name=\"2015-2016")
+        page = page[tmp_x:tmp_y]
+    if check == '1314':
+        tmp_x = page.find("<a name=\"2013-2014")
+        tmp_y = page.find("<a name=\"2014-2015")
+        page = page[tmp_x:tmp_y]
+    if check == '15161':
+        tmp_x = page.find("<a name=\"2015-2016")
+        page = page[tmp_x:]
     soup = BeautifulSoup(page)
     trs = soup.findAll('tr',{'class':'odd'})
     lists = []
@@ -171,15 +187,19 @@ def getSource(check):
     rsubjects = []   
 
         # select
-    if check == 'all':
+    if (check == 'all' or check == '1415' or check == '1314' or check == 'inter' or check == '15161'):
+        if check == 'inter':
+            tmp_bool = True
+        else:
+            tmp_bool = False
         for list in lists:
 		subject = []
-		if(list[5] == '\xe5\xbf\x85\xe4\xbf\xae'):
+		if(list[5] == '\xe5\xbf\x85\xe4\xbf\xae' or tmp_bool):
 			rsubjects.append([list[2],list[4],list[6]]) 
 			subject.append(list[4])
 			subject.append(list[6])
 			subjects.append(subject)
-    else:
+    elif check == 'one':
         for list in lists:
 		subject = []
 		if(list[5] == '\xe5\xbf\x85\xe4\xbf\xae'):

@@ -24,7 +24,7 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     # only test
     url(r'^query$','showTest.views.query',name='query'),
-    url(r'^$', 'showTest.views.home', name='home'),
+    url(r'^$', 'showTest.views.query', name='home'),
     url(r'^show/([a-z A-Z \d]+)$','showTest.views.show',name='show'),
     # for android
     url(r'^qilin/getkey/([a-z A-Z \d]+)$','showTest.views.getKey', name='getkey'),

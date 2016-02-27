@@ -197,14 +197,17 @@
 </head>
 
 <body>
-    <marquee behavior="scroll">由于服务器COOKIE的原因导致大家可能会跳转到其他同学的成绩，我们感到十分抱歉，现在已经修复完成。在绩点显示页面我们并没有显示同学姓名，请大家放心食用。</marquee> 
     <div class="page-container">
-        <h1>绩点查询终于像点系统的系统<br> alpha1.1</h1>
+        <h1>绩点查询系统<br> alpha1.1</h1>
         <form action="/query" method="post">
             {% csrf_token %} 
             {{ form.uid }}
             {{ form.pwd }}
+            <!--
            <font color="red">请选择查询方式 !!!(默认本学期)</font>
+		<center>由于本学期成绩还未开放，请选择全部成绩.进入后选择查询本学年成绩即可看到上学年的成绩。</center>
+           -->
+           
            <center> {{ form.check }} </center>
             <button type="submit" onclick="SubmitForm();" >查询</button>
         </form>
